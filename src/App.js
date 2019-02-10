@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Header} from "semantic-ui-react";
 
-import SampleComponent from "./SampleComponent";
+import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-        <div>
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h2>Project Mini-Mek</h2>
+        <div className='App-header'>
+          <Header inverted as='h1'>Project Mini-Mek</Header>
         </div>
-        <SampleComponent />
       </div>
     );
   }
