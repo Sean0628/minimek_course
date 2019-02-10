@@ -12,11 +12,10 @@ const TabBar = (props) => {
     return (
       <Tab
         key={name}
-      name={name}
-      label={label}
-      active={currentTab === name}
-      onClick={onTabClick}
-
+        name={name}
+        label={label}
+        active={currentTab === name}
+        onClick={onTabClick}
       />
     );
   });
