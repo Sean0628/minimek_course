@@ -1,6 +1,6 @@
 import {fetchData} from "data/mockAPI";
 
-import {DATA_LOADED} from "./toolConstans";
+import {DATA_LOADED} from "./toolConstants";
 
 export function loadUnitData() {
   return (dispatch, getState) => {
