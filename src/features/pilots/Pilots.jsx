@@ -46,7 +46,7 @@ const mapState = (state) => {
     // If there actually is an associated mech, include the
     // mech type's ID as a field in the data passed to the component
     if(mech && mech.type) {
-      pilot.mech.Type = mech.type.id;
+      pilot.mechType = mech.type.id;
     }
 
     return pilot;
