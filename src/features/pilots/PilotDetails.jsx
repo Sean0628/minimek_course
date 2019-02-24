@@ -9,6 +9,10 @@ import {
   selectIsEditingPilot
 } from "./pilotsSelectors";
 
+import {updateEntity} from "features/entities/entityActions";
+
+import {getValueFromEvent} from "common/utils/clientUtils";
+
 import {
   startEditingPilot,
   stopEditingPilot,
@@ -61,9 +65,18 @@ const mapState = (state) => {
 const actions = {
   startEditingPilot,
   stopEditingPilot,
+  updateEntity,
 }
 
 export class PilotDetails extends Component {
+
+  onNameChanged = (e) => {
+    const newValues = getValueFromEvent(e);
+    const {id} = this.props.pilot;
+
+    this.props.updateEntity("Pilot", id, newValues);
+  }
+
   render() {
     const {pilot = {}, pilotIsSelected = false, isEditingPilot = false} = this.props;
     const {startEditingPilot, stopEditingPilot} = this.props;
@@ -89,6 +102,7 @@ export class PilotDetails extends Component {
             placeholder="Name"
             value={name}
             disabled={!canStopEditing}
+            onChange={this.onNameChanged}
             control="input"
           />
           <Form.Field
