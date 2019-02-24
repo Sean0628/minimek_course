@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Form, Dropdown, Grid, Button} from "semantic-ui-react";
 
+import FormEditWrapper from "common/components/FormEditWrapper";
+
 import orm from "app/orm";
 
 import {
@@ -70,15 +72,16 @@ const actions = {
 
 export class PilotDetails extends Component {
 
-  onNameChanged = (e) => {
+  onInputChanged = (e) => {
     const newValues = getValueFromEvent(e);
     const {id} = this.props.pilot;
 
     this.props.updateEntity("Pilot", id, newValues);
   }
 
-  onRankChanged = (e, result) => {
-    const newValues = {rank : result.value};
+  onDropdownChanged = (e, result) => {
+    const {name, value} = result;
+    const newValues = { [name] : value};
     const {id} = this.props.pilot;
 
     this.props.updateEntity("Pilot", id, newValues);
@@ -102,16 +105,21 @@ export class PilotDetails extends Component {
 
     return (
         <Form size="large">
-          <Form.Field
-            name="name"
-            label="Name"
-            width={16}
-            placeholder="Name"
-            value={name}
-            disabled={!canStopEditing}
-            onChange={this.onNameChanged}
-            control="input"
-          />
+          <FormEditWrapper
+            singleValue={true}
+            value={ {name} }
+            onChange={this.onInputChanged}
+            passIsEditing={false}
+          >
+            <Form.Field
+              name="name"
+              label="Name"
+              width={16}
+              placeholder="Name"
+              disabled={!canStopEditing}
+              control="input"
+            />
+          </FormEditWrapper>
           <Form.Field
             name="rank"
             label="Rank"
@@ -121,18 +129,24 @@ export class PilotDetails extends Component {
             selection
             options={RANKS}
             value={rank}
-            onChange={this.onRankChanged}
+            onChange={this.onDropdownChanged}
             disabled={!canStopEditing}
           />
-          <Form.Field
-            name="age"
-            label="Age"
-            width={6}
-            placeholder="Age"
-            control="input"
-            value={age}
-            disabled={!canStopEditing}
-          />
+          <FormEditWrapper
+            singleValue={true}
+            value={ {age} }
+            onChange={this.onInputChanged}
+            passIsEditing={false}
+          >
+            <Form.Field
+              name="age"
+              label="Age"
+              width={6}
+              placeholder="Age"
+              control="input"
+              disabled={!canStopEditing}
+            />
+          </FormEditWrapper>
           <Form.Field
             name="gunnery"
             label="Gunnery"
@@ -142,6 +156,7 @@ export class PilotDetails extends Component {
             selection
             options={SKILL_VALUES}
             value={gunnery}
+            onChange={this.onDropdownChanged}
             disabled={!canStopEditing}
           />
           <Form.Field
@@ -153,6 +168,7 @@ export class PilotDetails extends Component {
             selection
             options={SKILL_VALUES}
             value={piloting}
+            onChange={this.onDropdownChanged}
             disabled={!canStopEditing}
           />
           <Form.Field
