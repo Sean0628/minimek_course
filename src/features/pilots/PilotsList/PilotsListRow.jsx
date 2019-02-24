@@ -1,9 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Table} from "semantic-ui-react";
+import {
+  Table,
+  Button,
+  Icon,
+} from "semantic-ui-react";
 import _ from "lodash";
 
 import {getEntitiesSession} from "features/entities/entitySelectors";
+import {deleteEntity} from "features/entities/entityActions";
 
 const mapState = (state, ownProps) => {
   const session = getEntitiesSession(state);
@@ -34,12 +39,13 @@ const mapState = (state, ownProps) => {
   }
 
   return {pilot};
-
-
-
 }
 
-const PilotsListRow = ({pilot={}, onPilotClicked=_.noop, selected}) => {
+const actions ={
+  deleteEntity,
+};
+
+const PilotsListRow = ({pilot={}, onPilotClicked=_.noop, selected, deleteEntity}) => {
   const {
     id = null,
     name = "",
@@ -49,6 +55,8 @@ const PilotsListRow = ({pilot={}, onPilotClicked=_.noop, selected}) => {
     piloting = "",
     mechType = "",
   } = pilot;
+
+  const onDeleteClicked = () => deleteEntity("Pilot", id);
 
   return (
       <Table.Row onClick={() => onPilotClicked(id)} active={selected}>
@@ -67,8 +75,20 @@ const PilotsListRow = ({pilot={}, onPilotClicked=_.noop, selected}) => {
         <Table.Cell>
           {mechType}
         </Table.Cell>
+        <Table.Cell>
+          <Button
+            compact
+            basic
+            circular
+            size='tiny'
+            color='red'
+            icon={<Icon name='delete' />}
+            onClick={onDeleteClicked}
+          >
+          </Button>
+        </Table.Cell>
       </Table.Row>
   );
 }
 
-export default connect(mapState)(PilotsListRow);
+export default connect(mapState, actions)(PilotsListRow);
