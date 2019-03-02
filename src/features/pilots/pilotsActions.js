@@ -1,5 +1,6 @@
 import {
   editExistingItem,
+  applyItemEdits,
   stopEditingItem
 } from "features/editing/editingActions";
 
@@ -40,6 +41,7 @@ export function stopEditingPilot() {
   return (dispatch, getState) => {
     const currentPilot = selectCurrentPilot(getState());
     dispatch({type : PILOT_EDIT_STOP});
+    dispatch(applyItemEdits("Pilot", currentPilot));
     dispatch(stopEditingItem("Pilot", currentPilot));
   };
 }
