@@ -10,6 +10,7 @@ import tabReducer from "features/tabs/tabsReducer";
 import unitInfoReducer from "features/unitInfo/unitInfoReducer";
 
 import entitycrudReducer from "features/entities/entityReducer";
+import editingFeatureReducer from "features/editing/editingReducer";
 
 const combinedReducer = combineReducers({
   entities : entitiesReducer,
@@ -23,7 +24,8 @@ const combinedReducer = combineReducers({
 
 const rootReducer = reduceReducers(
   combinedReducer,
-  entitycrudReducer
+  entitycrudReducer,
+  editingFeatureReducer,
 );
 
 export default rootReducer;
