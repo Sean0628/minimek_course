@@ -26,4 +26,8 @@ export default class Pilot extends Model {
   toJSON() {
     return {...this.ref};
   }
+
+  updateFrom(otherPilot) {
+    this.update(otherPilot.ref);
+  }
 }
