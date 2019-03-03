@@ -12,7 +12,7 @@ const actions = {loadUnitData, openModal};
 
 class Tools extends Component {
   onOpenModalClicked = () => {
-    this.props.openModal("TestModal", {a : 42});
+    this.props.openModal("TestModal", {counter : 1});
   }
 
   render() {
