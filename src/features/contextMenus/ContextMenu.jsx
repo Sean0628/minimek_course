@@ -13,11 +13,11 @@ export class ContextMenu extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListner('click', this.handleClickOutside, true);
+    document.removeEventListener('click', this.handleClickOutside, true);
   }
 
   handleClickOutside = (e) => {
-    if (!this.node || !this.contains(e.target) ) {
+    if (!this.node || !this.node.contains(e.target) ) {
       this.props.hideContextMenu();
     }
   }
