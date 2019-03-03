@@ -6,6 +6,7 @@ import FormEditWrapper from "common/components/FormEditWrapper";
 import ColorPickerButton from "common/components/ColorPicker/ColorPickerButton";
 
 import {getValueFromEvent} from "common/utils/clientUtils";
+import {showColorPicker} from "common/components/ColorPicker/colorPickerActions";
 
 import {selectUnitInfo} from "./unitInfoSelectors";
 import {updateUnitInfo} from "./unitInfoActions";
@@ -26,6 +27,7 @@ const mapState = (state) => ({
 
 const actions = {
   updateUnitInfo,
+  showColorPicker,
 };
 
 class UnitInfo extends Component {
@@ -39,6 +41,10 @@ class UnitInfo extends Component {
   onNameChanged = (e) => {
     const newValues = getValueFromEvent(e);
     this.props.updateUnitInfo(newValues);
+  }
+
+  onColorClicked = () => {
+    this.props.showColorPicker(this.props.unitInfo.color);
   }
 
   render() {
@@ -74,7 +80,7 @@ class UnitInfo extends Component {
           </Form.Field>
           <Form.Field name="color">
             <label>Color</label>
-            <ColorPickerButton value={color} />
+            <ColorPickerButton value={color} onClick={this.onColorClicked} />
           </Form.Field>
         </Form>
       </Segment>
